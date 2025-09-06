@@ -18,7 +18,10 @@
 ## 3) Arrow functions in ES6
 This is the Shorter way to write functions-> (is Arrow function):
 ```js
-const add = (a, b) => a + b;
+const add = (a, b) => a + b; // one liner code will automatically or implicit return
+const add2 = (a, b) => {  //two liner code will code or inside curly braces you have to return it explicitly
+     return a + b;
+  };
 ```
 
 ## 4) Destructuring assignment in ES6
