@@ -1,6 +1,4 @@
-## Readme File for API project English Janala
-
-# JavaScript ES6 Related Q&A
+# JavaScript ES6 Related Q&A (Requirement of Assignment-06)
 
 ## 1) Difference between var, let, and const
 - `var` → This is an old way, var is function-scoped, this can be re-declared.
