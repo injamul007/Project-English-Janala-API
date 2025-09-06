@@ -13,7 +13,7 @@
 - `filter()` → filter returns a **new array** with elements and you must give it a condition to decide which elements should be kept.
 
 ## 3) Arrow functions in ES6
-This is the Shorter way to write functions-> (is Arrow function):
+This is the Shortest way to write functions-> (is Arrow function):
 ```js
 const add = (a, b) => a + b; // one liner arrow function will automatically / implicit return
 const add2 = (a, b) => {  // Multi-line arrow function or inside curly braces you have to return it explicitly
@@ -22,7 +22,7 @@ const add2 = (a, b) => {  // Multi-line arrow function or inside curly braces yo
 ```
 
 ## 4) Destructuring assignment in ES6
-Takes out values directly from object/arrays into variables.
+Destructuring --> Takes out values directly from object/arrays into variables.
 Example of Destructuring:
 ```js
 const myInfo = {name: "Injamul", age: 29};
@@ -30,7 +30,7 @@ const {name, age} = myInfo; // takes out values directly into variables
 ```
 
 ## 5) Template literals in ES6
-Template literals use backticks `` instead of quotes(''/"") and you have to give variables inside of this ${}.
+Template literals --> We have to use backticks `` instead of quotes(''/"") and you have to give variables inside of this ${}.
 Example of Template literals:
 ```js
 const name = "Injamul";
