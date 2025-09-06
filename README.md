@@ -32,5 +32,5 @@ Template literals --> We have to use backticks `` instead of quotes(''/"") and y
 Example of Template literals:
 ```js
 const name = "Injamul";
-console.log(`Hello, ${name}!`);
+console.log(`Hi, My Name is ${name}!`);
 ```
