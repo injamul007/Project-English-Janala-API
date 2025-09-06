@@ -18,8 +18,8 @@
 ## 3) Arrow functions in ES6
 This is the Shorter way to write functions-> (is Arrow function):
 ```js
-const add = (a, b) => a + b; // one liner code will automatically / implicit return
-const add2 = (a, b) => {  //two liner code or inside curly braces you have to return it explicitly
+const add = (a, b) => a + b; // one liner arrow function will automatically / implicit return
+const add2 = (a, b) => {  // Multi-line arrow function or inside curly braces you have to return it explicitly
      return a + b;
   };
 ```
