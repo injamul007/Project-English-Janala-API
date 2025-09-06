@@ -8,12 +8,9 @@
 - `const` → const is also a block-scoped, you cannot change value(bcz it's constant).
 
 ## 2) Difference between map(), forEach(), and filter()
-- `map()` → map returns a **new array** and you must give it a function to modify each 
-                                          element.
-- `forEach()` → forEach just **loops through**, and print values but it doesn’t return
-                                                anything.
-- `filter()` → filter returns a **new array** with elements and you must give it a condition 
-                                              to decide which elements should be kept.
+- `map()` → map returns a **new array** and you must give it a function to modify each element.
+- `forEach()` → forEach just **loops through**, and print values but it doesn’t return anything.
+- `filter()` → filter returns a **new array** with elements and you must give it a condition to decide which elements should be kept.
 
 ## 3) Arrow functions in ES6
 This is the Shorter way to write functions-> (is Arrow function):
@@ -25,14 +22,16 @@ const add2 = (a, b) => {  // Multi-line arrow function or inside curly braces yo
 ```
 
 ## 4) Destructuring assignment in ES6
+Takes out values directly from object/arrays into variables.
 Example of Destructuring:
 ```js
 const myInfo = {name: "Injamul", age: 29};
-const {name, age} = myInfo; 
+const {name, age} = myInfo; // takes out values directly into variables
 ```
 
 ## 5) Template literals in ES6
-We Have to use backticks and `${}`:
+Template literals use backticks `` instead of quotes(''/"") and you have to give variables inside of this ${}.
+Example of Template literals:
 ```js
 const name = "Injamul";
 console.log(`Hello, ${name}!`);
