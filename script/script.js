@@ -1,5 +1,21 @@
 //? js file for English Janala with API
 
+const createElements = (arr) => {
+  const htmlElements = arr.map(el => `<span class="btn">${el}</span>`)
+  return htmlElements.join(" ");
+}
+
+const manageSpinner = (status) => {
+  if(status === true) {
+    document.getElementById('spinner').classList.remove('hidden')
+    document.getElementById('word_container').classList.add('hidden')
+  } else {
+    document.getElementById('word_container').classList.remove('hidden')
+    document.getElementById('spinner').classList.add('hidden')
+
+  }
+}
+
 const loadLesson = () => {
   fetch('https://openapi.programming-hero.com/api/levels/all')
   .then(res => res.json())
@@ -8,11 +24,11 @@ const loadLesson = () => {
 
 const removeActive = () => {
   const lessonBtnAll = document.querySelectorAll('.lesson_btn');
-    // console.log(lessonBtnAll);
     lessonBtnAll.forEach(lessonBtn => lessonBtn.classList.remove('active'));
 }
 
 const loadLevelWord = (id) => {
+  manageSpinner(true);
   const url = `https://openapi.programming-hero.com/api/level/${id}`;
   fetch(url)
   .then(res => res.json())
@@ -22,6 +38,35 @@ const loadLevelWord = (id) => {
     lessonBtnActive.classList.add('active'); //? add only active class
     displayLevelWord(jsData2.data);
   })
+};
+
+const loadWordDetail = async (id) => {
+  const url = `https://openapi.programming-hero.com/api/word/${id}`;
+  const res = await fetch(url)
+  const jsData3 = await res.json()
+  displayWordDetails(jsData3.data)
+}
+
+const displayWordDetails = (wordDetails) => {
+  const {word,meaning,pronunciation,sentence,synonyms} = wordDetails;
+
+  const detailsContainer = document.getElementById('details_container');
+  detailsContainer.innerHTML = `<div>
+        <h2 class="text-2xl font-bold">${word} ( <i class="fa-solid fa-microphone-lines"></i>    :${pronunciation})</h2>
+      </div>
+      <div>
+        <h2 class="font-bold">Meaning</h2>
+        <p>${meaning}</p>
+      </div>
+      <div>
+        <h2 class="font-bold">Example</h2>
+        <p>${sentence}</p>
+      </div>
+      <div>
+        <h2 class="font-bangla font-semibold mb-1">Synonyms</h2>
+        <div class="">${createElements(synonyms)}</div>
+      </div>`;
+  document.getElementById('word_modal').showModal();
 }
 
 const displayLevelWord = (words) => {
@@ -36,13 +81,14 @@ const displayLevelWord = (words) => {
         <p class="font-medium text-gray-500">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
         <h2 class="text-3xl font-semibold">নেক্সট Lesson এ যান</h2>
       </div>`;
+      manageSpinner(false);
     return;
   }
   
   //? 2. get into every lesson
   words.forEach(word => {
     //? destructuring the array of object
-    const {meaning,pronunciation,word:wordName} = word;
+    const {id,meaning,pronunciation,word:wordName} = word;
     // console.log(word)
     //? 3. create element
     const wordCard = document.createElement('div');
@@ -52,14 +98,14 @@ const displayLevelWord = (words) => {
 
         <div class="font-bangla text-2xl font-medium">${meaning? meaning:"অর্থ পাওয়া যায়নি"} / ${pronunciation? pronunciation:"pronunciation পাওয়া যায়নি"}</div>
         <div class="flex justify-between items-center mt-6">
-          <button class="btn bg-[#1a91ff10] hover:bg-[#1a91ff30]"><i class="fa-solid fa-circle-info"></i></button>
+          <button onclick="loadWordDetail(${id})" class="btn bg-[#1a91ff10] hover:bg-[#1a91ff30]"><i class="fa-solid fa-circle-info"></i></button>
           <button class="btn bg-[#1a91ff10] hover:bg-[#1a91ff30]"><i class="fa-solid fa-volume-high"></i></button>
         </div>
       </div>`;
     //? 4. append into container
     wordContainer.append(wordCard);
   });
-
+  manageSpinner(false);
 }
 
 const displayLesson = (lessons) => {
@@ -85,3 +131,19 @@ const displayLesson = (lessons) => {
 
 
 loadLesson();
+
+
+document.getElementById('btn_search').addEventListener('click', () => {
+  removeActive()
+  const input = document.getElementById('input_search');
+  const searchValue = input.value.trim().toLowerCase();
+
+  fetch('https://openapi.programming-hero.com/api/words/all')
+  .then(res => res.json())
+  .then(jsData4 => {
+    const allWords = jsData4.data;
+    // console.log(allWords)
+    const filterWords = allWords.filter(word => word.word.toLowerCase().includes(searchValue));
+    displayLevelWord(filterWords)
+  })
+})
